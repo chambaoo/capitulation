@@ -1,0 +1,2 @@
+# capitulation
+practice ts app
