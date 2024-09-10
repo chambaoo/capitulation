@@ -7,6 +7,9 @@ class Foods {
     constructor() {
         // generics
         this.elements = document.querySelectorAll('.food');
+        this.show = () => {
+            console.log(this.elements);
+        };
         this.elements.forEach(elements => {
             new Food();
         });
@@ -14,5 +17,8 @@ class Foods {
 }
 function runApp() {
     console.log('hello');
+    const food = new Foods();
+    food.show();
+    console.log('done');
 }
 runApp();
