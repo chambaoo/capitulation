@@ -2,10 +2,11 @@ class Score {}
 
 class Food {
     constructor(public element: HTMLElement) {
-        element.addEventListener('click',this.clickEventHandler.bind(this));
+        element.addEventListener('click',this.clickEventHandler);
     }
 
     clickEventHandler = () => {
+        console.log(this);
         this.element.classList.toggle('food--active');
     }
 }
@@ -20,3 +21,5 @@ class Foods {
         })
     }
 }
+
+const foods = new Foods();

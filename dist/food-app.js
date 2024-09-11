@@ -5,9 +5,10 @@ class Food {
     constructor(element) {
         this.element = element;
         this.clickEventHandler = () => {
+            console.log(this);
             this.element.classList.toggle('food--active');
         };
-        element.addEventListener('click', this.clickEventHandler.bind(this));
+        element.addEventListener('click', this.clickEventHandler);
     }
 }
 class Foods {
@@ -19,3 +20,4 @@ class Foods {
         });
     }
 }
+const foods = new Foods();
