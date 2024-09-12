@@ -1,4 +1,11 @@
-class Score {}
+class Score {
+    get totalScore() {
+        const foods = new Foods();
+        const total = foods.activeElementsScore.reduce((total, score) => total + score, 0);
+        console.log(total);
+        return foods.activeElementsScore.reduce((total, score) => total + score, 0);
+    }
+}
 
 class Food {
 
@@ -9,6 +16,7 @@ class Food {
     clickEventHandler = () => {
         this.element.classList.toggle('food--active');
         console.log(foods.activeElements);
+        console.log(foods.activeElementsScore);
     }
 }
 
@@ -23,6 +31,7 @@ class Foods {
     }
 
     private _activeElements: HTMLDivElement[] = [];
+    private _activeElementsScore: number[] = [];
 
     get activeElements () {
         this._activeElements = [];
@@ -34,6 +43,19 @@ class Foods {
         })
 
         return this._activeElements;
+    }
+
+    get activeElementsScore() {
+        this._activeElementsScore = [];
+
+        this.activeElements.forEach(element => {
+            const foodScore = element.querySelector('food__score');
+            if (foodScore) {
+                this._activeElementsScore.push(Number(foodScore));
+            }
+        })
+
+        return this._activeElementsScore;
     }
 }
 
