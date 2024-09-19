@@ -6,6 +6,9 @@ class Score {
         console.log(total);
         return foods.activeElementsScore.reduce((total, score) => total + score, 0);
     }
+    render() {
+        document.querySelector('.score__number').textContent = String(this.totalScore);
+    }
 }
 class Food {
     constructor(element) {
