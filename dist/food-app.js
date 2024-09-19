@@ -1,7 +1,7 @@
 "use strict";
 class Score {
     get totalScore() {
-        const foods = new Foods();
+        const foods = Foods.getInstance();
         const total = foods.activeElementsScore.reduce((total, score) => total + score, 0);
         console.log(total);
         return foods.activeElementsScore.reduce((total, score) => total + score, 0);
@@ -15,8 +15,8 @@ class Food {
         this.element = element;
         this.clickEventHandler = () => {
             this.element.classList.toggle('food--active');
-            console.log(foods.activeElements);
-            console.log(foods.activeElementsScore);
+            const score = new Score();
+            score.render();
         };
         element.addEventListener('click', this.clickEventHandler.bind(this));
     }
@@ -30,6 +30,11 @@ class Foods {
         this.elements.forEach(element => {
             new Food(element);
         });
+    }
+    static getInstance() {
+        if (Foods.instance)
+            return Foods.instance;
+        return Foods.instance = new Foods();
     }
     get activeElements() {
         this._activeElements = [];
@@ -51,4 +56,4 @@ class Foods {
         return this._activeElementsScore;
     }
 }
-const foods = new Foods();
+const foods = Foods.getInstance();

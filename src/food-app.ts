@@ -1,6 +1,6 @@
 class Score {
     get totalScore() {
-        const foods = new Foods();
+        const foods = Foods.getInstance();
         const total = foods.activeElementsScore.reduce((total, score) => total + score, 0);
         console.log(total);
         return foods.activeElementsScore.reduce((total, score) => total + score, 0);
@@ -19,19 +19,27 @@ class Food {
 
     clickEventHandler = () => {
         this.element.classList.toggle('food--active');
-        console.log(foods.activeElements);
-        console.log(foods.activeElementsScore);
+        const score = new Score();
+        score.render();
     }
 }
 
 class Foods {
+
     // generics
     elements = document.querySelectorAll<HTMLDivElement>('.food');
 
-    constructor() {
+    // singleton
+    private static instance: Foods;
+    
+    private constructor() {
         this.elements.forEach(element => {
             new Food(element);
         })
+    }
+    static getInstance() {
+        if (Foods.instance) return Foods.instance;
+        return Foods.instance = new Foods();
     }
 
     private _activeElements: HTMLDivElement[] = [];
@@ -63,4 +71,4 @@ class Foods {
     }
 }
 
-const foods = new Foods();
+const foods = Foods.getInstance();
